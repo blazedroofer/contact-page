@@ -10,7 +10,24 @@ body {
 
 .container {
   text-align: center;
-  padding: 2rem;
+  padding: 6rem 2rem 4rem;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+h1 {
+  font-size: 4rem;          /* Bigger name – adjust to taste */
+  margin: 0;
+  font-weight: bold;
+  color: #333;              /* Or your brand color */
+}
+
+p {  /* The "Let's connect!" */
+  font-size: 1.5rem;
+  margin: 0;
+  color: #666;
 }
 
 .contact-card {
@@ -64,4 +81,5 @@ body {
     flex-direction: column;
     text-align: center;
   }
+
 }
