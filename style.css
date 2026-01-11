@@ -30,6 +30,14 @@ p {  /* The "Let's connect!" */
   color: #666;
 }
 
+.tagline {
+  font-size: 1.4rem;
+  max-width: 600px;
+  margin: 1rem auto 0;
+  color: #555;
+  font-style: italic;
+}
+
 .contact-card {
   background: white;
   border-radius: 12px;
@@ -83,3 +91,4 @@ p {  /* The "Let's connect!" */
   }
 
 }
+
