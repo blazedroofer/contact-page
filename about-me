@@ -4,27 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Josh | About Me</title>
-  <link rel="stylesheet" href="style.css" />  <!-- Reuse the same CSS -->
+  <link rel="stylesheet" href="style.css" />  <!-- Links to same CSS -->
 </head>
 <body>
-<nav class="navbar">
-  <div class="nav-container">
-    <h2 class="logo">Josh</h2>
-    <ul class="nav-links">
-      <li><a href="https://blazedroofer.github.io/contact-page/home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+  <!-- Reuse the navbar here -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <h2 class="logo">Josh</h2>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>  <!-- Back to main page -->
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>  <!-- Scrolls to contact on main page -->
+      </ul>
+    </div>
+  </nav>
   <div class="container">
     <h1>About Josh</h1>
-    <p>From the top of a roof to the bottom of a code editor — that's my journey. I've spent my career as a roofer, fixing leaks, installing shingles, and making sure families stay dry and safe. But a few years ago, I discovered coding, and it clicked in the same way swinging a hammer does: precise, creative, and satisfying. Now I'm balancing hard hats with keyboards, raising my son, and chasing new skills every day. Web dev started as a hobby; now it's becoming part of who I am. If you're into building things (literal or digital), drop me a line — I'd love to connect.
-
-</p>
-    <!-- Add sections, photos, etc. -->
-    <a href="index.html">Back to Contact</a>
+    <p>I'm Josh, a full-time roofer by day and a passionate web developer in the making by night. With years on rooftops turning blueprints into solid structures, I'm now channeling that same hands-on problem-solving into code. When I'm not climbing ladders or debugging flexbox, you'll find me being the best dad I can be to my son. Always learning, always building — whether it's a house or a website. Let's chat about projects, roofing tips, or just life!</p>
+    <!-- Add more sections, photos, etc. -->
   </div>
 </body>
 </html>
-
