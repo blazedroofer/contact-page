@@ -7,7 +7,16 @@
   <link rel="stylesheet" href="style.css" />  <!-- Links to same CSS -->
 </head>
 <body>
-  <!-- Reuse the navbar here -->
+ <nav class="navbar">
+  <div class="nav-container">
+    <h2 class="logo">Josh</h2>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
   <nav class="navbar">
     <div class="nav-container">
       <h2 class="logo">Josh</h2>
