@@ -52,6 +52,11 @@ p {  /* The "Let's connect!" */
   gap: 2rem;
   align-items: center;
 }
+body {
+  background: linear-gradient(to bottom, #6a11cb, #2575fc); /* Purple top to blue-ish bottom */
+  color: #fff; /* White text for contrast if needed, but keep your text dark */
+  min-height: 100vh;
+}
 
 .avatar {
   width: 150px;
@@ -146,4 +151,5 @@ p {  /* The "Let's connect!" */
     display: none; /* Hide initially, show with JS */
   }
 }
+
 
