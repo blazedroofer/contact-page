@@ -151,5 +151,15 @@ body {
     display: none; /* Hide initially, show with JS */
   }
 }
+/* Smooth scroll for anchors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add padding to avoid navbar overlap */
+.container {
+  padding-top: 80px;  /* Adjust based on your navbar height – try 100px if taller */
+}
+
 
 
