@@ -258,6 +258,22 @@ html {
   color: #e0e0e0;
   font-weight: 500;
 }
+/* Fix navbar overlap on mobile */
+@media (max-width: 768px) {
+  .navbar {
+    height: auto; /* Let it expand naturally */
+    padding-bottom: 1rem; /* Extra breathing room at bottom of nav */
+  }
+  
+  body {
+    padding-top: 180px; /* Increase top padding to push hero down enough for expanded nav */
+  }
+  
+  .hero {
+    margin-top: 0; /* No extra margin needed */
+  }
+}
+
 
 
 
