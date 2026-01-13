@@ -272,6 +272,39 @@ html {
     margin-top: 0;
   }
 }
+  /* Mobile-friendly hero adjustments */
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh; /* Slightly shorter hero on mobile to fit more content */
+    min-height: 500px; /* Minimum to avoid squishing */
+  }
+
+  .hero-content h1 {
+    font-size: 3rem !important; /* Smaller h1 on mobile – prevents cutoff */
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+  }
+
+  .hero-content {
+    padding: 2rem; /* Less padding on mobile */
+  }
+
+  .site-slogan {
+    font-size: 1.1rem;
+    margin: 0.5rem 0 1rem;
+  }
+}
+  ss
+
+.hero-content h1 {
+  font-size: 5rem;
+  line-height: 1;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+
+
 
 
 
