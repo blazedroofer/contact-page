@@ -169,6 +169,40 @@ html {
     padding: 0.8rem;
   }
 }
+.hero {
+  height: 60vh;                    /* Takes up 60% of screen height – adjust as needed */
+  background-image: url('hero1.jpg'); /* your uploaded photo */
+  background-size: cover;          /* fills the area nicely */
+  background-position: center;     /* centers the most interesting part */
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.45); /* dark overlay so text is readable */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 2rem;
+}
+
+/* Make sure the main container starts below the hero */
+.container {
+  padding-top: 2rem;  /* space after hero */
+}
+
 
 
 
