@@ -168,7 +168,7 @@ html {
     display: block;
     padding: 0.8rem;
   }
-}
+/* Hero Section - Cleaned & Stronger Contrast */
 .hero {
   height: 70vh;
   background-image: url('hero1.jpg');
@@ -187,7 +187,7 @@ html {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.65); /* darker overlay */
+  background: rgba(0, 0, 0, 0.75); /* Stronger dark overlay – start here, adjust to 0.7-0.8 if needed */
   z-index: 1;
 }
 
@@ -196,18 +196,20 @@ html {
   z-index: 2;
   max-width: 900px;
   padding: 3rem;
-  color: #ffffff !important;
+  color: #ffffff !important; /* Force pure white */
 }
 
 .hero-content h1,
 .hero-content p,
 .hero-content .tagline {
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.95);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.95); /* Heavy shadow for max pop */
+  -webkit-text-stroke: 0.5px black; /* Thin black outline – remove if too bold */
+  letter-spacing: 0.5px; /* Slight spacing for crispness */
 }
 
-/* Make sure the main container starts below the hero */
+/* Space after hero for contact card */
 .container {
-  padding-top: 2rem;  /* space after hero */
+  padding-top: 2rem;
 }
 /* Text shadow for better readability on hero background */
 .hero-content h1,
@@ -227,6 +229,7 @@ html {
 .hero-content p,
 .hero-content .tagline {
   text-shadow: 2px 2px 8px rgba(0,0,0,1); /* hard black shadow for max contrast */
+
 
 
 
