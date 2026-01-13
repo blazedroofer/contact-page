@@ -252,6 +252,13 @@ html {
   border-radius: 16px;
   padding: 3rem 4rem;
 }
+  .intro-text {
+  font-size: 1.3rem;
+  margin: 1rem 0 2rem;
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
 
 
 
