@@ -1,30 +1,78 @@
 body {
   font-family: system-ui, sans-serif;
-  background: rgb(120, 98, 216);
+  background: linear-gradient(to bottom, #6a11cb, #2575fc);
   margin: 0;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #111; /* dark text for better readability on gradient */
 }
 
 .container {
   text-align: center;
   padding: 6rem 2rem 4rem;
+  padding-top: 80px; /* for navbar */
   min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.5rem;
 }
-h1 {
-  font-size: 4rem;          /* Bigger name – adjust to taste */
+
+After you make these changes:Save the file
+Refresh Live Server (or hard refresh live site)
+The duplicates are gone, no conflicts, and your gradient + navbar padding will work together perfectly.
+
+If you paste the updated full style.css after cleaning, I can double-check for any leftover issues. You're doing great — cleaning duplicates like this makes everything load cleaner and faster! 
+
+Explain CSS specificity rules
+
+Add hamburger menu JS
+
+Provide full cleaned CSS file
+
+can you add it to my code im strugglign with this one
+
+Executing code
+
+1 result
+
+Here's your cleaned-up style.css with all duplicates removed/merged, the problematic hiding media query deleted, and everything organized logically.Just replace the entire content of your style.css file with this version (copy-paste it):css
+
+/* Base styles */
+body {
+  font-family: system-ui, sans-serif;
+  background: linear-gradient(to bottom, #6a11cb, #2575fc); /* your purple gradient */
   margin: 0;
-  font-weight: bold;
-  color: #333;              /* Or your brand color */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #111; /* dark text for good contrast on gradient */
 }
 
-p {  /* The "Let's connect!" */
+/* Main content container */
+.container {
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  padding-top: 80px;           /* space for fixed navbar */
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Headings and text */
+h1 {
+  font-size: 4rem;
+  margin: 0;
+  font-weight: bold;
+  color: #333;
+}
+
+p {
   font-size: 1.5rem;
   margin: 0;
   color: #666;
@@ -38,6 +86,7 @@ p {  /* The "Let's connect!" */
   font-style: italic;
 }
 
+/* Contact card */
 .contact-card {
   background: white;
   border-radius: 12px;
@@ -45,19 +94,13 @@ p {  /* The "Let's connect!" */
   padding: 2rem;
   max-width: 500px;
   margin: 0 auto;
-  
-  /* Flexbox time! */
   display: flex;
   flex-direction: row;
   gap: 2rem;
   align-items: center;
 }
-body {
-  background: linear-gradient(to bottom, #6a11cb, #2575fc); /* Purple top to blue-ish bottom */
-  color: #fff; /* White text for contrast if needed, but keep your text dark */
-  min-height: 100vh;
-}
 
+/* Avatar */
 .avatar {
   width: 150px;
   height: 150px;
@@ -67,6 +110,7 @@ body {
   border: 4px solid #0066cc;
 }
 
+/* Info and links */
 .info {
   text-align: left;
 }
@@ -88,16 +132,9 @@ body {
   text-decoration: underline;
 }
 
-/* Mobile friendly */
-@media (max-width: 600px) {
-  .contact-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-}
+/* Navbar */
 .navbar {
-  position: fixed;              /* Sticks to top */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -138,18 +175,20 @@ body {
   color: #0066cc;
 }
 
-
-  
-}
-/* Smooth scroll for anchors */
+/* Smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
 }
 
-/* Add padding to avoid navbar overlap */
-.container {
-  padding-top: 80px;  /* Adjust based on your navbar height – try 100px if taller */
+/* Mobile adjustments - contact card */
+@media (max-width: 600px) {
+  .contact-card {
+    flex-direction: column;
+    text-align: center;
+  }
 }
+
+/* Mobile adjustments - navbar (stack vertically instead of hiding) */
 @media (max-width: 768px) {
   .nav-container {
     flex-direction: column;
@@ -172,6 +211,9 @@ html {
     padding: 0.8rem;
   }
 }
+
+
+
 
 
 
