@@ -210,7 +210,17 @@ html {
 }
 .hero::before {
   background: rgba(0, 0, 0, 0.6); /* ← Change from 0.45 to 0.6 or even 0.65 for more darkness */
+  
 }
+.hero-content {
+  color: #ffffff !important; /* pure white – overrides any inheritance */
+}
+
+.hero-content h1,
+.hero-content p,
+.hero-content .tagline {
+  text-shadow: 2px 2px 8px rgba(0,0,0,1); /* hard black shadow for max contrast */
+
 
 
 
