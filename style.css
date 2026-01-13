@@ -170,10 +170,10 @@ html {
   }
 }
 .hero {
-  height: 60vh;                    /* Takes up 60% of screen height – adjust as needed */
-  background-image: url('hero1.jpg'); /* your uploaded photo */
-  background-size: cover;          /* fills the area nicely */
-  background-position: center;     /* centers the most interesting part */
+  height: 70vh;
+  background-image: url('hero1.jpg');
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
@@ -187,7 +187,7 @@ html {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.45); /* dark overlay so text is readable */
+  background: rgba(0, 0, 0, 0.65); /* darker overlay */
   z-index: 1;
 }
 
@@ -195,7 +195,14 @@ html {
   position: relative;
   z-index: 2;
   max-width: 900px;
-  padding: 2rem;
+  padding: 3rem;
+  color: #ffffff !important;
+}
+
+.hero-content h1,
+.hero-content p,
+.hero-content .tagline {
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.95);
 }
 
 /* Make sure the main container starts below the hero */
@@ -220,6 +227,7 @@ html {
 .hero-content p,
 .hero-content .tagline {
   text-shadow: 2px 2px 8px rgba(0,0,0,1); /* hard black shadow for max contrast */
+
 
 
 
