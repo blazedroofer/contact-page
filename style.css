@@ -1,45 +1,3 @@
-body {
-  font-family: system-ui, sans-serif;
-  background: linear-gradient(to bottom, #6a11cb, #2575fc);
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #111; /* dark text for better readability on gradient */
-}
-
-.container {
-  text-align: center;
-  padding: 6rem 2rem 4rem;
-  padding-top: 80px; /* for navbar */
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-After you make these changes:Save the file
-Refresh Live Server (or hard refresh live site)
-The duplicates are gone, no conflicts, and your gradient + navbar padding will work together perfectly.
-
-If you paste the updated full style.css after cleaning, I can double-check for any leftover issues. You're doing great — cleaning duplicates like this makes everything load cleaner and faster! 
-
-Explain CSS specificity rules
-
-Add hamburger menu JS
-
-Provide full cleaned CSS file
-
-can you add it to my code im strugglign with this one
-
-Executing code
-
-1 result
-
-Here's your cleaned-up style.css with all duplicates removed/merged, the problematic hiding media query deleted, and everything organized logically.Just replace the entire content of your style.css file with this version (copy-paste it):css
-
 /* Base styles */
 body {
   font-family: system-ui, sans-serif;
@@ -211,6 +169,7 @@ html {
     padding: 0.8rem;
   }
 }
+
 
 
 
