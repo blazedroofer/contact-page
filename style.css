@@ -204,6 +204,15 @@ html {
     padding: 0.8rem;
   }
 }
+.site-slogan {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #444;
+  margin: 1rem 0 2rem;  /* space above/below */
+  font-style: italic;
+  letter-spacing: 1px;
+}
 
 
 
