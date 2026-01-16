@@ -1,7 +1,7 @@
-/* Base styles */
+* Base styles */
 body {
   font-family: system-ui, sans-serif;
-  background: linear-gradient(to bottom, #6a11cb, #2575fc); /* purple gradient fallback */
+  background: linear-gradient(to bottom, #a5d6ff, #e0f7fa); /* Lighter blue-cyan gradient for better readability with dark text */
   margin: 0;
   min-height: 100vh;
   color: #111; /* dark text for main content */
@@ -109,6 +109,7 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.85); /* Semi-transparent white overlay for better text contrast on gradient */
 }
 
 /* Headings and text */
