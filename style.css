@@ -69,7 +69,7 @@ body {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.75); /* strong dark overlay */
+  background: rgba(0, 0, 0, 0.85); /* Much darker overlay */
   z-index: 1;
 }
 
@@ -79,21 +79,31 @@ body {
   max-width: 900px;
   padding: 3rem;
   color: #ffffff !important; /* force pure white */
+  background: rgba(0, 0, 0, 0.4); /* Semi-transparent black box behind text */
+  border-radius: 16px;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
 .hero-content h1,
 .hero-content p,
 .hero-content .tagline {
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.95); /* heavy shadow */
-  -webkit-text-stroke: 0.5px black; /* thin black outline */
-  letter-spacing: 0.5px;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 1); /* Very heavy, dark shadow */
+  -webkit-text-stroke: 1px black; /* Thick black outline */
+  letter-spacing: 1px;
+  font-weight: 900; /* Bolder weight for extra punch */
+}
+
+.hero-content h1 {
+  font-size: 5rem;
+  line-height: 1;
+  margin-bottom: 1rem;
 }
 
 /* Main content container (below hero) */
 .container {
   text-align: center;
   padding: 6rem 2rem 4rem;
-  padding-top: 2rem;           /* space after hero */
+  padding-top: 2rem; /* space after hero */
   min-height: 60vh;
   display: flex;
   flex-direction: column;
@@ -121,6 +131,23 @@ p {
   margin: 1rem auto 0;
   color: #555;
   font-style: italic;
+}
+
+.site-slogan {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #444;
+  margin: 1rem 0 3rem; /* increased bottom margin */
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.intro-text {
+  font-size: 1.3rem;
+  margin: 1rem 0 2rem;
+  color: #e0e0e0;
+  font-weight: 500;
 }
 
 /* Contact card */
@@ -169,9 +196,38 @@ p {
   text-decoration: underline;
 }
 
+/* Images container */
+.images-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.about-image {
+  max-width: 45%; /* Adjust for side-by-side on larger screens */
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Mobile adjustments */
@@ -183,100 +239,43 @@ html {
 }
 
 @media (max-width: 768px) {
+  body {
+    padding-top: 220px; /* Increased from 80px – adjust to 200–250px as needed */
+  }
+
+  .navbar {
+    padding-bottom: 1rem; /* Extra space at bottom of nav for breathing room */
+  }
+
   .nav-container {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .nav-links {
     flex-direction: column;
     gap: 1rem;
     margin-top: 1rem;
     width: 100%;
   }
-  
+
   .nav-links li {
     width: 100%;
   }
-  
+
   .nav-links a {
     display: block;
     padding: 0.8rem;
   }
-.site-slogan {
-  text-align: center;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: #444;
-  margin: 1rem 0 3rem;  /* increased bottom margin */
-  font-style: italic;
-  letter-spacing: 1px;
-}
-/* Slightly bigger hero text for impact */
-.hero-content h1 {
-  font-size: 4.5rem; /* or 5rem on desktop */
-}
 
-@media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 3.5rem;
-  }
-}
-
-/* Add subtle fade-in animation to hero text (optional fun) */
-.hero-content {
-  animation: fadeIn 1.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-  /* Max readability fixes for hero text - add at bottom */
-.hero::before {
-  background: rgba(0, 0, 0, 0.85);  /* Much darker overlay – start here */
-}
-
-.hero-content h1,
-.hero-content p,
-.hero-content .tagline {
-  text-shadow: 0 5px 15px rgba(0, 0, 0, 1);  /* Very heavy, dark shadow */
-  -webkit-text-stroke: 1px black;           /* Thick black outline – makes text "cut" through */
-  letter-spacing: 1px;
-  font-weight: 900;                         /* Bolder weight for extra punch */
-}
-
-/* Optional: Slight background behind text for extreme cases */
-.hero-content {
-  background: rgba(0, 0, 0, 0.4);  /* Semi-transparent black box behind text */
-  border-radius: 16px;
-  padding: 3rem 4rem;
-}
-  .intro-text {
-  font-size: 1.3rem;
-  margin: 1rem 0 2rem;
-  color: #e0e0e0;
-  font-weight: 500;
-}
-/* Fix navbar overlap on mobile */
-@media (max-width: 768px) {
-  body {
-    padding-top: 220px; /* Increased from 80px – adjust to 200–250px as needed */
-  }
-  
-  .navbar {
-    padding-bottom: 1rem; /* Extra space at bottom of nav for breathing room */
-  }
-  
-  .hero {
-    margin-top: 0;
-  }
-}
-  /* Mobile-friendly hero adjustments */
-@media (max-width: 768px) {
   .hero {
     height: 60vh; /* Slightly shorter hero on mobile to fit more content */
     min-height: 500px; /* Minimum to avoid squishing */
+    margin-top: 0;
+  }
+
+  .hero-content {
+    padding: 2rem; /* Less padding on mobile */
   }
 
   .hero-content h1 {
@@ -285,23 +284,16 @@ html {
     margin: 0 0 1rem 0;
   }
 
-  .hero-content {
-    padding: 2rem; /* Less padding on mobile */
-  }
-
   .site-slogan {
     font-size: 1.1rem;
     margin: 0.5rem 0 1rem;
   }
-}
-  ss
 
-.hero-content h1 {
-  font-size: 5rem;
-  line-height: 1;
-  font-weight: 900;
-  margin-bottom: 1rem;
+  .about-image {
+    max-width: 100%; /* Stack images on smaller screens */
+  }
 }
+
 
 
 
