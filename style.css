@@ -294,6 +294,38 @@ html {
     max-width: 100%; /* Stack images on smaller screens */
   }
 }
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  gap: 15px;
+}
+
+.quality-button {
+  background-color: #0066cc; /* Blue to match your theme */
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quality-button:hover {
+  background-color: #004d99; /* Darker blue on hover */
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .buttons-container {
+    flex-direction: column;
+  }
+}
+
 
 
 
