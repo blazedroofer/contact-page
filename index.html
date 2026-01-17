@@ -13,7 +13,9 @@
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="about-me.html">About</a></li>
+        <li><a href="#services">Services</a></li>  <!-- Added Services link -->
         <li><a href="#contact">Contact</a></li>
+        <li><a href="mailto:jdpearsall123@gmail.com">jdpearsall123@gmail.com</a></li>  <!-- Added your email to nav -->
       </ul>
     </div>
   </nav>
@@ -21,14 +23,62 @@
   <!-- Slogan below navbar -->
   <p class="site-slogan">Built to Last</p>
 
-  <!-- Hero section -->
-  <div class="hero" id="home">
+  <!-- Hero section with CTA button -->
+  <div class="hero" id="home" style="background-image: url('hero1.jpg');">  <!-- Ensured background image is set -->
     <div class="hero-content">
       <h1>Josh – Roof-It Owner</h1>
       <p>Let's connect! Drop me an email for any roofing questions.</p>  <!-- Merged/cleaned the duplicate lines into one -->
       <p class="tagline">Roofer by trade, web dev learner by passion, dad 24/7. Let's build something cool.</p>
+      <button class="quality-button" onclick="document.getElementById('quote-form').style.display='block';">Get a Quote</button>  <!-- Added CTA button -->
     </div>
   </div>
+
+  <!-- Quote Form (hidden by default) -->
+  <div id="quote-form" style="display: none; padding: 20px; background: white; border: 1px solid #ccc; max-width: 400px; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <h2>Get a Quote</h2>
+    <form id="quoteForm" action="https://formspree.io/f/your-form-id" method="POST"> <!-- Replace with your Formspree endpoint or similar -->
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+      
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+      
+      <label for="message">Message:</label><br>
+      <textarea id="message" name="message" required style="width: 100%; padding: 8px; margin-bottom: 10px; height: 100px;"></textarea><br>
+      
+      <input type="submit" value="Submit" style="background: #0066cc; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+    </form>
+  </div>
+
+  <!-- Services Offered Section -->
+  <section id="services" class="container services-section">
+    <h2>Services Offered</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <img src="service1.jpg" alt="Roof Installation" class="service-image">  <!-- Add your images here -->
+        <h3>Roof Installation</h3>
+        <p>Professional installation of new roofs using high-quality materials for long-lasting protection.</p>
+      </div>
+      <div class="service-item">
+        <img src="service2.jpg" alt="Repair & Maintenance" class="service-image">
+        <h3>Repair & Maintenance</h3>
+        <p>Expert repairs for leaks, shingle replacement, and routine maintenance to extend your roof's life.</p>
+      </div>
+      <div class="service-item">
+        <img src="service3.jpg" alt="Inspection Services" class="service-image">
+        <h3>Inspection Services</h3>
+        <p>Thorough roof inspections to identify issues early and prevent costly damage.</p>
+      </div>
+      <!-- Add more services as needed -->
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section id="video" class="container video-section">
+    <h2>Watch Our Process</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>  <!-- Replace with actual roofing video ID -->
+    <p>A quick demo of our roofing techniques – quality you can trust!</p>
+  </section>
 
   <!-- Contact card -->
   <div class="container">
@@ -47,6 +97,7 @@
     </div>
   </div>
 </body>
+</html>
 
 
 
