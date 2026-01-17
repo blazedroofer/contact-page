@@ -36,17 +36,29 @@
   <!-- Quote Form (hidden by default) -->
   <div id="quote-form" style="display: none; padding: 20px; background: white; border: 1px solid #ccc; max-width: 400px; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
     <h2>Get a Quote</h2>
-    <form id="quoteForm" action="https://formspree.io/f/your-form-id" method="POST"> <!-- Replace with your Formspree endpoint or similar -->
-      <label for="name">Name:</label><br>
-      <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+    <form id="quoteForm" action="https://formspree.io/f/mnjjjley" method="POST"> <!-- Your Formspree endpoint -->
+      <label for="first_name">First Name:</label><br>
+      <input type="text" id="first_name" name="first_name" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
       
-      <label for="email">Email:</label><br>
+      <label for="last_name">Last Name:</label><br>
+      <input type="text" id="last_name" name="last_name" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+      
+      <label for="address">Address:</label><br>
+      <input type="text" id="address" name="address" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+      
+      <label for="postal_code">Postal Code:</label><br>
+      <input type="text" id="postal_code" name="postal_code" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+      
+      <label for="email">Your Email:</label><br>
       <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
       
-      <label for="message">Message:</label><br>
+      <label for="phone">Phone:</label><br>
+      <input type="tel" id="phone" name="phone" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+      
+      <label for="message">Your Message:</label><br>
       <textarea id="message" name="message" required style="width: 100%; padding: 8px; margin-bottom: 10px; height: 100px;"></textarea><br>
       
-      <input type="submit" value="Submit" style="background: #0066cc; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+      <button type="submit" style="background: #0066cc; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">Send</button>
     </form>
   </div>
 
