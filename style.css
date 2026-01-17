@@ -28,9 +28,9 @@ body {
 }
 
 .logo {
+  width: 150px; /* Adjust size as needed for your logo image */
+  height: auto;
   margin: 0;
-  font-size: 1.8rem;
-  color: #0066cc;
 }
 
 .nav-links {
@@ -38,6 +38,7 @@ body {
   display: flex;
   gap: 2rem;
   margin: 0;
+  align-items: center; /* Align items vertically for button consistency */
 }
 
 .nav-links a {
@@ -48,6 +49,21 @@ body {
 
 .nav-links a:hover {
   color: #0066cc;
+}
+
+/* Email Button Styling */
+.email-button {
+  background-color: #0066cc; /* Matches theme */
+  color: white !important; /* Override default color */
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.email-button:hover {
+  background-color: #004d99;
+  color: white;
 }
 
 /* Hero Section - Strong contrast for roofing photo */
@@ -372,6 +388,7 @@ html {
   max-width: 100%;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
 
 
