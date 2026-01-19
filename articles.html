@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Expert roofing advice and answers to common questions. Learn about roof replacement, repairs, maintenance, and more from Roof-It.">
+  <title>Roof-It | Roofing Articles & Expert Advice</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #1a1a1a;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #e63946;
+    }
+
+    /* Slogan */
+    .site-slogan {
+      background: #e63946;
+      color: #fff;
+      text-align: center;
+      padding: 0.75rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    /* Hero Section */
+    .articles-hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hero1.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 4rem 2rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .articles-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .articles-hero p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    /* Category Filter */
+    .category-filter {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .category-btn {
+      padding: 0.75rem 1.5rem;
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      color: #333;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background: #e63946;
+      color: #fff;
+      border-color: #e63946;
+    }
+
+    /* Articles Grid */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .article-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .article-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #e63946 0%, #d62828 100%);
+    }
+
+    .article-content {
+      padding: 1.5rem;
+    }
+
+    .article-category {
+      display: inline-block;
+      background: #e63946;
+      color: #fff;
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: #1a1a1a;
+    }
+
+    .article-excerpt {
+      color: #666;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #999;
+      font-size: 0.85rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .read-time {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Full Article View */
+    .article-full {
+      display: none;
+      background: #fff;
+      border-radius: 10px;
+      padding: 3rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .article-full.active {
+      display: block;
+    }
+
+    .article-full h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+
+    .article-full .article-meta {
+      margin-bottom: 2rem;
+    }
+
+    .article-full h3 {
+      font-size: 1.8rem;
+      margin: 2rem 0 1rem;
+      color: #1a1a1a;
+      border-left: 4px solid #e63946;
+      padding-left: 1rem;
+    }
+
+    .article-full p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    .article-full ul {
+      margin: 1rem 0 1.5rem 2rem;
+    }
+
+    .article-full li {
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .back-btn {
+      background: #e63946;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+      margin-bottom: 2rem;
+    }
+
+    .back-btn:hover {
+      background: #d62828;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: #e63946;
+      color: #fff;
+      padding: 3rem 2rem;
+      text-align: center;
+      border-radius: 10px;
+      margin-top: 3rem;
+    }
+
+    .cta-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .cta-button {
+      background: #fff;
+      color: #e63946;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .articles-hero h1 {
+        font-size: 2rem;
+      }
+
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .article-full h2 {
+        font-size: 1.8rem;
+      }
+
+      .article-full h3 {
+        font-size: 1.4rem;
+      }
+
+      .category-filter {
+        flex-direction: column;
+      }
+
+      .category-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <h2 class="logo">Roof-It</h2>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about-me.html">About</a></li>
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <p class="site-slogan">Built to Last</p>
+
+  <div class="articles-hero">
+    <h1>Roofing Expert Advice</h1>
+    <p>Your questions answered by a roofer who's been in the trenches</p>
+  </div>
+
+  <div class="container">
+    <!-- Category Filter -->
+    <div class="category-filter">
+      <button class="category-btn active" onclick="filterArticles('all')">All Articles</button>
+      <button class="category-btn" onclick="filterArticles('maintenance')">Maintenance</button>
+      <button class="category-btn" onclick="filterArticles('replacement')">Replacement</button>
+      <button class="category-btn" onclick="filterArticles('repair')">Repair</button>
+      <button class="category-btn" onclick="filterArticles('costs')">Costs & Planning</button>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="articles-grid" id="articlesGrid">
+      <!-- Article 1 -->
+      <div class="article-card" data-category="replacement" onclick="showArticle('article1')">
+        <div class="article-image"></div>
+        <div class="article-content">
+          <span class="article-category">Replacement</span>
+          <h3>How Long Does a Roof Last?</h3>
+          <p class="article-excerpt">Understanding your roof's lifespan can help you plan for replacement and avoid costly emergency repairs.</p>
+          <div class="article-meta">
+            <span>Jan 15, 2026</span>
+            <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="article-card" data-category="costs" onclick="showArticle('article2')">
+        <div class="article-image"></div>
+        <div class="article-content">
+          <span class="article-category">Costs & Planning</span>
+          <h3>What Does a New Roof Cost in 2026?</h3>
+          <p class="article-excerpt">Breakdown of roofing costs, what affects pricing, and how to budget for your roof replacement project.</p>
+          <div class="article-meta">
+            <span>Jan 12, 2026</span>
+            <span class="read-time"><i class="fas fa-clock"></i> 7 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="article-card" data-category="maintenance" onclick="showArticle('article3')">
+        <div class="article-image"></div>
+        <div class="article-content">
+          <span class="article-category">Maintenance</span>
+          <h3>5 Signs Your Roof Needs Repair</h3>
+          <p class="article-excerpt">Don't wait until it's too late. Learn the warning signs that your roof needs professional attention.</p>
+          <div class="article-meta">
+            <span>Jan 10, 2026</span>
+            <span class="read-time"><i class="fas fa-clock"></i> 6 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 4 -->
+      <div class="article-card" data-category="maintenance" onclick="showArticle('article4')">
+        <div class="article-image"></div>
+        <div class="article-content">
+          <span class="article-category">Maintenance</span>
+          <h3>Should I Clean My Roof?</h3>
+          <p class="article-excerpt">The truth about roof cleaning, when it's necessary, and how to do it safely without damaging your shingles.</p>
+          <div class="article-meta">
+            <span>Jan 8, 2026</span>
+            <span class="read-time"><i class="fas fa-clock"></i> 4 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 5 -->
+      <div class="article-card" data-category="repair" onclick="showArticle('article5')">
+        <div class="article-image"></div>
+        <div class="article-content">
+          <span class="article-category">Repair</span>
+          <h3>Roof Leak? Here's What to Do</h3>
+          <p class="article-excerpt">Emergency steps to minimize damage and when to call a professional for roof leak repairs.</p>
+          <div class="article-meta">
+            <span>Jan 5, 2026</span>
+            <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 6 -->
+      <div class="article-card" data-category="replacement" onclick="showArticle('article6')">
+        <div class="article-image"></div>
+        <div class="article-content">
+          <span class="article-category">Replacement</span>
+          <h3>Asphalt Shingles vs Metal Roofing</h3>
+          <p class="article-excerpt">Comparing the two most popular roofing materials to help you choose what's right for your home.</p>
+          <div class="article-meta">
+            <span>Jan 3, 2026</span>
+            <span class="read-time"><i class="fas fa-clock"></i> 8 min read</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full Article Views (Hidden by default) -->
+    <div id="article1" class="article-full">
+      <button class="back-btn" onclick="hideArticle()"><i class="fas fa-arrow-left"></i> Back to Articles</button>
+      <span class="article-category">Replacement</span>
+      <h2>How Long Does a Roof Last?</h2>
+      <div class="article-meta">
+        <span>January 15, 2026</span>
+        <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
+      </div>
+
+      <p>One of the most common questions homeowners ask is about their roof's lifespan. Understanding how long your roof will last helps you plan financially and avoid unexpected expenses. The truth is, it depends on several factors.</p>
+
+      <h3>Typical Roof Lifespans by Material</h3>
+      <p>Different roofing materials have vastly different lifespans:</p>
+      <ul>
+        <li><strong>Asphalt Shingles (3-Tab):</strong> 15-20 years</li>
+        <li><strong>Architectural Shingles:</strong> 25-30 years</li>
+        <li><strong>Metal Roofing:</strong> 40-70 years</li>
+        <li><strong>Cedar Shakes:</strong> 20-25 years</li>
+        <li><strong>Slate or Tile:</strong> 50-100+ years</li>
+      </ul>
+
+      <h3>What Affects Your Roof's Lifespan?</h3>
+      <p>The actual lifespan of your roof depends on several key factors that are often overlooked:</p>
+      
+      <p><strong>Climate and Weather:</strong> Extreme temperatures, heavy snow, ice dams, and high winds all take a toll. Canadian winters are particularly hard on roofs due to freeze-thaw cycles that can crack shingles and cause ice damming.</p>
+
+      <p><strong>Installation Quality:</strong> This is huge. A poorly installed roof might only last half as long as one installed correctly. That's why choosing an experienced roofer who's done the work himself—not just managed a crew—makes all the difference.</p>
+
+      <p><strong>Ventilation and Insulation:</strong> Poor attic ventilation causes heat and moisture buildup, which can rot your roof deck and shorten shingle life dramatically. I've seen 20-year shingles fail in 10 years because of ventilation issues.</p>
+
+      <p><strong>Maintenance:</strong> Regular inspections and minor repairs can add years to your roof. Clearing debris, checking flashing, and fixing small issues before they become big problems is essential.</p>
+
+      <h3>When Should You Replace Your Roof?</h3>
+      <p>Don't just go by age. Look for these warning signs: curling or missing shingles, granules in your gutters, daylight through roof boards, sagging areas, or water stains on your ceiling. If your roof is nearing the end of its expected lifespan and showing multiple issues, replacement is usually more cost-effective than ongoing repairs.</p>
+
+      <p><strong>Bottom line:</strong> Most asphalt shingle roofs in our area last 20-25 years with proper installation and care. Want to maximize your roof's lifespan? Start with quality installation from someone who knows what they're doing.</p>
+    </div>
+
+    <div id="article2" class="article-full">
+      <button class="back-btn" onclick="hideArticle()"><i class="fas fa-arrow-left"></i> Back to Articles</button>
+      <span class="article-category">Costs & Planning</span>
+      <h2>What Does a New Roof Cost in 2026?</h2>
+      <div class="article-meta">
+        <span>January 12, 2026</span>
+        <span class="read-time"><i class="fas fa-clock"></i> 7 min read</span>
+      </div>
+
+      <p>Let's talk money. A new roof is one of the biggest home improvement investments you'll make, and you deserve transparent pricing. Having worked on hundreds of roofs and built my own pricing estimator, I can break down what you're actually paying for.</p>
+
+      <h3>Average Costs in Ontario (2026)</h3>
+      <p>For a typical 2,000 square foot home with asphalt shingles, you're looking at:</p>
+      <ul>
+        <li><strong>Basic 3-Tab Shingles:</strong> $5,000 - $8,000</li>
+        <li><strong>Architectural Shingles:</strong> $7,000 - $12,000</li>
+        <li><strong>Premium/Designer Shingles:</strong> $10,000 - $16,000</li>
+        <li><strong>Metal Roofing:</strong> $15,000 - $25,000</li>
+      </ul>
+
+      <h3>What Affects Your Roof's Price?</h3>
+      <p><strong>Roof Size and Complexity:</strong> Obviously, bigger roofs cost more. But complexity matters just as much—multiple valleys, dormers, skylights, and steep pitches all increase labor time and material waste.</p>
+
+      <p><strong>Material Quality:</strong> You get what you pay for. Cheap shingles might save you $2,000 upfront but could need replacement 10 years sooner. I always recommend mid-grade architectural shingles for the best value—they last longer and look better.</p>
+
+      <p><strong>Tear-Off and Disposal:</strong> Removing your old roof and hauling away debris costs money. Some quotes don't include this, so make sure you're comparing apples to apples.</p>
+
+      <p><strong>Decking Repairs:</strong> Once we tear off your old shingles, we might find rotted plywood that needs replacement. Honest roofers won't know this until they see it. I always budget for potential deck repairs to avoid surprises.</p>
+
+      <p><strong>Labor and Overhead:</strong> This is where big companies with fancy trucks and office staff differ from operations like mine. I keep overhead low and pass those savings to you without sacrificing quality.</p>
+
+      <h3>Red Flags in Roofing Quotes</h3>
+      <p>Suspiciously low quotes often mean corners will be cut. Watch for contractors who won't provide written estimates, pressure you to decide immediately, or require large upfront deposits. Get at least three quotes and ask detailed questions about materials, warranties, and what's included.</p>
+
+      <p><strong>My approach:</strong> I built a Python-based estimator that factors in your roof's exact specifications—pitch, size, complexity, material choice—to give you transparent, accurate pricing. No hidden fees, no surprises. Just honest work at fair prices.</p>
+    </div>
+
+    <div id="article3" class="article-full">
+      <button class="back-btn" onclick="hideArticle()"><i class="fas fa-arrow-left"></i> Back to Articles</button>
+      <span class="article-category">Maintenance</span>
+      <h2>5 Signs Your Roof Needs Repair</h2>
+      <div class="article-meta">
+        <span>January 10, 2026</span>
+        <span class="read-time"><i class="fas fa-clock"></i> 6 min read</span>
+      </div>
+
+      <p>Catching roof problems early can save you thousands. Here are the warning signs I look for when inspecting roofs—and what you can spot yourself from the ground.</p>
+
+      <h3>1. Missing, Cracked, or Curling Shingles</h3>
+      <p>This is the most obvious sign. Walk around your house and look up. Missing shingles leave your roof deck exposed to water. Curling edges mean shingles are past their prime. Cracked shingles will leak eventually. Don't wait—these issues get worse fast, especially through winter freeze-thaw cycles.</p>
+
+      <h3>2. Granules in Your Gutters</h3>
+      <p>Asphalt shingles are covered in protective granules. As they age, these granules wash off into your gutters. A little is normal, but if you're seeing heavy accumulation or bald spots on shingles, your roof is nearing the end of its life. This is often one of the first signs of aging.</p>
+
+      <h3>3. Water Stains on Ceilings or Walls</h3>
+      <p>Inside your home, look for brown or yellow stains on ceilings, especially near exterior walls or in the attic. This means water is getting through. Even small leaks cause big problems—mold, rotted framing, ruined insulation. If you see stains, call a roofer immediately.</p>
+
+      <h3>4. Sagging Roof Deck</h3>
+      <p>Stand back and look at your roofline. It should be straight. Any sagging, dipping, or wavy areas indicate structural problems—usually from prolonged water damage or inadequate support. This is serious and needs immediate professional attention.</p>
+
+      <h3>5. Daylight Through Roof Boards</h3>
+      <p>Go into your attic during the day and turn off all lights. If you see daylight coming through the roof boards, you have holes or gaps. Where light gets in, water follows. Also check for water stains, dark spots, or mold on the underside of your roof deck while you're up there.</p>
+
+      <h3>What To Do If You Spot These Signs</h3>
+      <p>Don't panic, but don't wait either. Small issues become expensive problems quickly. Get a professional inspection to assess the damage and your options. Sometimes repairs are enough, but if multiple issues are present or your roof is over 20 years old, replacement might be more cost-effective.</p>
+
+      <p>I offer free inspections and honest assessments—if you only need a repair, I'll tell you. If you need replacement, I'll explain exactly why and what your options are.</p>
+    </div>
+
+    <div id="article4" class="article-full">
+      <button class="back-btn" onclick="hideArticle()"><i class="fas fa-arrow-left"></i> Back to Articles</button>
+      <span class="article-category">Maintenance</span>
+      <h2>Should I Clean My Roof?</h2>
+      <div class="article-meta">
+        <span>January 8, 2026</span>
+        <span class="read-time"><i class="fas fa-clock"></i> 4 min read</span>
+      </div>
+
+      <p>This is a controversial topic in roofing. Some companies push aggressive cleaning services, while others say never touch your roof. Here's the honest truth from someone who's seen both extremes.</p>
+
+      <h3>When Roof Cleaning Makes Sense</h3>
+      <p>If your roof has heavy moss, algae, or lichen growth, it's worth addressing. These organisms trap moisture against your shingles, accelerating deterioration. Black streaks (actually algae called Gloeocapsa magma) are mostly cosmetic but can shorten shingle life over time.</p>
+
+      <h3>The Right Way vs The Wrong Way</h3>
+      <p><strong>NEVER pressure wash your roof.</strong> This is critical. High-pressure washing strips protective granules, voids warranties, and damages shingles. I've had to replace roofs that were ruined by aggressive pressure washing.</p>
+
+      <p>The right approach is gentle: low-pressure application of specialized cleaning solution, let it sit, then rinse with a garden hose or let rain do the work. For moss, carefully brush it off when dry, working downward to avoid lifting shingles.</p>
+
+      <h3>Prevention is Better</h3>
+      <p>The best strategy is preventing growth in the first place. Trim overhanging branches to increase sunlight and airflow. Consider zinc or copper strips at the roof peak—rainwater running over them inhibits growth. Keep gutters clean so water doesn't back up under shingles.</p>
+
+      <h3>When to Skip Cleaning</h3>
+      <p>If your shingles are already old or brittle, cleaning might do more harm than good. On a roof over 15 years old, I usually advise against it unless growth is severe—the risk of damage outweighs cosmetic benefits when you're already planning replacement soon.</p>
+
+      <p><strong>Bottom line:</strong> Light cleaning with proper techniques can extend roof life, but aggressive methods or cleaning old roofs is asking for trouble. If you're unsure, get a pro's opinion before you or someone else gets up there.</p>
+    </div>
+
+    <div id="article5" class="article-full">
+      <button class="back-btn" onclick="hideArticle()"><i class="fas fa-arrow-left"></i> Back to Articles</button>
+      <span class="article-category">Repair</span>
+      <h2>Roof Leak? Here's What to Do</h2>
+      <div class="article-meta">
+        <span>January 5, 2026</span>
+        <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
+      </div>
+
+      <p>Finding water dripping from your ceiling is panic-inducing. But staying calm and taking the right steps immediately can minimize damage and costs. Here's your action plan.</p>
+
+      <h3>Immediate Steps (First Hour)</h3>
+      <p><strong>1. Contain the water:</strong> Put buckets under active leaks. Move furniture and valuables away from the leak area. If water is pooling on your ceiling and bulging, carefully poke a small hole in the lowest point to drain it into a bucket—this prevents a large ceiling collapse.</p>
+
+      <p><strong>2. Stop the source if possible:</strong> If you can safely access your attic during the leak, try to locate where water is coming in. Place a bucket there and use towels to soak up standing water. This prevents it from spreading to other areas.</p>
+
+      <p><strong>3. Document everything:</strong> Take photos and videos of the damage for insurance purposes. Document wet areas, stains, damaged belongings, and the leak source if you found it.</p>
+
+      <h3>Temporary Fixes (Until Help Arrives)</h3>
+      <p>If you can safely access your roof and it's not during a storm, you might apply a tarp. Extend it over the ridge so water runs off both sides. Secure it with boards—NEVER use nails through your shingles. But honestly, if it's actively raining or your roof is steep, don't risk it. Call a professional.</p>
+
+      <h3>Finding the Leak Source</h3>
+      <p>Here's the tricky part: water doesn't always enter where it appears inside. It can travel along rafters or insulation before dripping through. Common leak sources include damaged shingles, failed flashing around chimneys or vents, clogged gutters causing overflow, or ice dams in winter.</p>
+
+      <h3>When to Call a Professional</h3>
+      <p>Immediately. Even if you've done temporary fixes, you need a professional inspection to find the real source and assess damage. Water leaks rarely fix themselves—they only get worse.</p>
+
+      <p>Small leaks can often be repaired quickly and affordably. But waiting turns a $500 repair into a $5,000 problem once water rots your roof deck or causes mold.</p>
+
+      <p><strong>My promise:</strong> If you call me about a leak, I'll prioritize your call. I know roof leaks are emergencies. I'll assess the damage honestly and provide options—whether that's a simple repair or something more extensive. No unnecessary upselling, just the truth about what your roof needs.</p>
+    </div>
+
+    <div id="article6" class="article-full">
+      <button class="back-btn" onclick="hideArticle()"><i class="fas fa-arrow-left"></i> Back to Articles</button>
+      <span class="article-category">Replacement</span>
+      <h2>Asphalt Shingles vs Metal Roofing</h2>
+      <div class="article-meta">
+        <span>January 3, 2026</span>
+        <span class="read-time"><i class="fas fa-clock"></i> 8 min read</span>
+      </div>
+
+      <p>Choosing between asphalt shingles and metal roofing is one of the biggest decisions when replacing your roof. Both have pros and cons. Let me break down what I've learned installing both over the years.</p>
+
+      <h3>Asphalt Shingles: The Standard Choice</h3>
+      <p><strong>Pros:</strong> Lower upfront cost ($7,000-$12,000 for most homes), familiar aesthetic that fits any home style, easy repairs, and every roofer knows how to install them. Wide variety of colors and styles available. If installed correctly, you're looking at 25-30 years of solid protection.</p>
+
+      <p><strong>Cons:</strong> Shorter lifespan than metal, more vulnerable to wind damage, can grow algae in humid climates, and not as energy-efficient as metal. Requires complete replacement when it fails—you can't just patch it indefinitely.</p>
+
+      <h3>Metal Roofing: The Long-Term Investment</h3>
+      <p><strong>Pros:</strong> Incredible lifespan (40-70 years), extremely durable against wind/hail/fire, reflects heat to reduce cooling costs, environmentally friendly (often made from recycled materials and fully recyclable), and looks modern. Snow slides off easily—no ice dams.</p>
+
+      <p><strong>Cons:</strong> Higher initial cost ($15,000-$25,000+), can be noisy during heavy rain without proper insulation, denting possible with hail (though rare with quality materials), and not all roofers have metal installation experience—poor installation ruins the benefits.</p>
+
+      <h3>Cost Analysis: 30-Year View</h3>
+      <p>Here's where it gets interesting. Asphalt might cost $10,000 now, but you'll replace it once in 30 years—total cost around $20,000. Metal costs $20,000 now but lasts 50+ years—no replacement needed. Metal often saves money long-term, especially when you factor in energy savings.</p>
+
+      <h3>Which Should You Choose?</h3>
+      <p><strong>Choose asphalt if:</strong> You're on a tighter budget, plan to sell within 15 years, prefer traditional appearance, or your home's style doesn't suit metal.</p>
+
+      <p><strong>Choose metal if:</strong> This is your forever home, you want minimal maintenance, you're in an area with severe weather, or energy efficiency matters to you. The higher upfront cost pays off over time.</p>
+
+      <h3>My Personal Take</h3>
+      <p>I install both and recommend based on your specific situation—not commission or my preference. For most homeowners planning to stay 10+ years, metal makes financial sense despite the higher initial cost. But quality architectural shingles are still an excellent choice and what I'd use on a rental property or if budget is tight.</p>
+
+      <p>Want to discuss which is right for your home? I can walk your roof, assess your specific needs, and give you honest pricing for both options. No pressure, just facts.</p>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <h2>Have More Questions?</h2>
+      <p>Get expert answers and a free roof inspection from someone who's done the work.</p>
+      <a href="index.html#home" class="cta-button">Schedule Your Free Inspection</a>
+    </div>
+  </div>
+
+  <script>
+    function filterArticles(category) {
+      const articles = document.querySelectorAll('.article-card');
+      const buttons = document.querySelectorAll('.category-btn');
+      
+      // Update active button
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Filter articles
+      articles.forEach(article => {
+        if (category === 'all' || article.dataset.category === category) {
+          article.style.display = 'block';
+        } else {
+          article.style.display = 'none';
+        }
+      });
+    }
+
+    function showArticle(articleId) {
+      // Hide grid
+      document.getElementById('articlesGrid').style.display = 'none';
+      document.querySelector('.category-filter').style.display = 'none';
+      
+      // Show selected article
+      document.getElementById(articleId).classList.add('active');
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+
+    function hideArticle() {
+      // Hide all articles
+      document.querySelectorAll('.article-full').forEach(article => {
+        article.classList.remove('active');
+      });
+      
+      // Show grid
+      document.getElementById('articlesGrid').style.display = 'grid';
+      document.querySelector('.category-filter').style.display = 'flex';
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
