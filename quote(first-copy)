@@ -1,0 +1,320 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Sheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #c62828 0%, #8b1a1a 100%);
+            color: white;
+            padding: 40px;
+        }
+        
+        .company-name {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 16px;
+            opacity: 0.95;
+            font-style: italic;
+        }
+        
+        .quote-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px 40px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .info-section h3 {
+            color: #c62828;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .info-section p {
+            margin: 5px 0;
+            font-size: 15px;
+        }
+        
+        .mission {
+            background: #fff5f5;
+            padding: 30px 40px;
+            border-left: 4px solid #c62828;
+            margin: 30px 40px;
+        }
+        
+        .mission h2 {
+            color: #c62828;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .mission p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .options-section {
+            padding: 20px 40px 40px;
+        }
+        
+        .options-section h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #c62828;
+        }
+        
+        .option-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .option-card:hover {
+            border-color: #c62828;
+            box-shadow: 0 4px 12px rgba(198, 40, 40, 0.15);
+        }
+        
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .option-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .option-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #c62828;
+        }
+        
+        .option-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        
+        .features {
+            list-style: none;
+        }
+        
+        .features li {
+            padding: 6px 0 6px 25px;
+            position: relative;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        .total-section {
+            background: #fff5f5;
+            padding: 25px 40px;
+            margin: 0 40px 40px;
+            border-radius: 8px;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="company-name">Roof It</div>
+            <div class="tagline">Quality roofing you can trust</div>
+        </div>
+        
+        <div class="quote-info">
+            <div class="info-section">
+                <h3>Quote For</h3>
+                <p><strong>Client Name</strong></p>
+                <p>Client Company</p>
+                <p>client@email.com</p>
+                <p>(555) 123-4567</p>
+            </div>
+            <div class="info-section">
+                <h3>Quote Details</h3>
+                <p><strong>Quote #:</strong> Q-2026-001</p>
+                <p><strong>Date:</strong> January 22, 2026</p>
+                <p><strong>Valid Until:</strong> February 22, 2026</p>
+                <p><strong>Project:</strong> Website Redesign</p>
+            </div>
+        </div>
+        
+        <div class="mission">
+            <h2>Our Commitment to Quality</h2>
+            <p>At Roof It, we're dedicated to protecting your home with superior craftsmanship and premium materials. Every roof we install meets the highest industry standards, and we stand behind our work with comprehensive warranties. Your satisfaction and peace of mind are our top priorities.</p>
+        </div>
+        
+        <div class="options-section">
+            <h2>Roofing Package Options</h2>
+            
+            <div class="option-card">
+                <div class="option-header">
+                    <div class="option-name">Standard Package</div>
+                    <div class="option-price">$8,500</div>
+                </div>
+                <div class="option-description">
+                    Professional installation with quality materials and a 40-year architectural shingle warranty.
+                </div>
+                <ul class="features">
+                    <li>Complete tear-off of existing shingles (1 layer)</li>
+                    <li>GAF Timberline HDZ architectural shingles (or comparable) - 40 year warranty</li>
+                    <li>Standard ice and water shield at eaves and valleys</li>
+                    <li>Felt underlayment</li>
+                    <li>Ridge vent installation</li>
+                    <li>New drip edge</li>
+                    <li>Manufacturer's warranty included</li>
+                    <li>Debris cleanup and disposal</li>
+                </ul>
+            </div>
+            
+            <div class="option-card">
+                <div class="option-header">
+                    <div class="option-name">Premium Package</div>
+                    <div class="option-price">$10,200</div>
+                </div>
+                <div class="option-description">
+                    Enhanced protection with upgraded materials for superior weather resistance and longevity.
+                </div>
+                <ul class="features">
+                    <li>Complete tear-off of existing shingles (1 layer)</li>
+                    <li>GAF Timberline HDZ architectural shingles (or comparable) - 40 year warranty</li>
+                    <li><strong>GAF StormGuard upgraded ice and water shield</strong></li>
+                    <li><strong>GAF Deck Armor premium synthetic underlayment</strong></li>
+                    <li>Ridge vent installation</li>
+                    <li>New drip edge</li>
+                    <li>Enhanced manufacturer's warranty</li>
+                    <li>Debris cleanup and disposal</li>
+                </ul>
+            </div>
+            
+            <div class="option-card">
+                <div class="option-header">
+                    <div class="option-name">Custom Deluxe Package</div>
+                    <div class="option-price">$12,500</div>
+                </div>
+                <div class="option-description">
+                    Complete premium solution with custom upgrades for maximum protection and curb appeal.
+                </div>
+                <ul class="features">
+                    <li>Complete tear-off of existing shingles (1 layer)</li>
+                    <li>GAF Timberline HDZ architectural shingles (or comparable) - 40 year warranty</li>
+                    <li>GAF StormGuard upgraded ice and water shield</li>
+                    <li>GAF Deck Armor premium synthetic underlayment</li>
+                    <li><strong>Custom metal flashings (valleys, chimneys, walls)</strong></li>
+                    <li><strong>Extended ice and water coverage (full coverage option)</strong></li>
+                    <li>Ridge vent installation</li>
+                    <li>New drip edge and custom trim work</li>
+                    <li>Premium manufacturer's warranty</li>
+                    <li>Priority scheduling</li>
+                    <li>Debris cleanup and disposal</li>
+                </ul>
+            </div>
+            
+            <div class="option-card" style="background: #fffbf0; border-color: #ff9800;">
+                <div class="option-header">
+                    <div class="option-name" style="color: #e65100;">Important Note: Additional Costs</div>
+                </div>
+                <div class="option-description" style="color: #555;">
+                    The above pricing is based on standard conditions. Additional charges will apply for:
+                </div>
+                <ul class="features">
+                    <li style="color: #555;"><strong>Extra layer removal:</strong> If your roof has more than one layer of shingles, additional tear-off labor and disposal fees will be required</li>
+                    <li style="color: #555;"><strong>Plywood replacement:</strong> Rotted or damaged roof decking discovered during tear-off will need replacement - pricing determined by square footage needed</li>
+                    <li style="color: #555;"><strong>Structural repairs:</strong> Any unforeseen structural issues will be documented with photos and quoted separately before proceeding</li>
+                </ul>
+                <p style="margin-top: 15px; color: #e65100; font-weight: 600;">We will inspect and provide pricing for any additional work before proceeding. No surprise charges.</p>
+            </div>
+        </div>
+        
+        <div class="total-section">
+            <div class="total-row">
+                <span>Selected Package Total:</span>
+                <span>$10,200</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Roof It</strong> | Licensed & Insured</p>
+            <p>Phone: (555) 123-4567 | Email: info@roofit.com | www.roofit.com</p>
+            <p style="margin-top: 15px;">This quote is valid for 30 days from the date of issue. Final price subject to inspection. Payment terms available.</p>
+        </div>
+    </div>
+</body>
+</html>
