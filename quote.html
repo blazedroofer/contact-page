@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roof It - Proposal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .page {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+        
+        /* Cover Page */
+        .cover-page {
+            background: linear-gradient(135deg, #c62828 0%, #8b1a1a 100%);
+            color: white;
+            padding: 80px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .company-logo {
+            font-size: 72px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+        }
+        
+        .tagline {
+            font-size: 24px;
+            margin-bottom: 60px;
+            opacity: 0.95;
+            font-style: italic;
+        }
+        
+        .proposal-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        
+        .client-info {
+            font-size: 20px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .proposal-date {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* About Us Page */
+        .intro-page {
+            padding: 60px 40px;
+        }
+        
+        .greeting {
+            font-size: 36px;
+            font-weight: bold;
+            color: #c62828;
+            margin-bottom: 20px;
+        }
+        
+        .greeting-sub {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .about-section {
+            margin-bottom: 50px;
+        }
+        
+        .about-title {
+            font-size: 28px;
+            color: #c62828;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #c62828;
+            padding-bottom: 10px;
+        }
+        
+        .about-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .value-box {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #c62828;
+        }
+        
+        .value-box h3 {
+            color: #c62828;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .value-box p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        /* Quote Page */
+        .quote-page {
+            padding: 40px;
+        }
+        
+        .quote-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .info-section h3 {
+            color: #c62828;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .info-section p {
+            margin: 5px 0;
+            font-size: 15px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #c62828;
+        }
+        
+        .option-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .option-header {
+            background: #c62828;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .option-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .option-price {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .option-body {
+            padding: 30px;
+        }
+        
+        .option-description {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        .scope-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .scope-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .scope-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+            font-size: 15px;
+        }
+        
+        .scope-list li:before {
+            content: "✓ ";
+            color: #c62828;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .materials-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        
+        .materials-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .materials-list {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .important-note {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 4px;
+        }
+        
+        .important-note h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .important-note p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        
+        .total-section {
+            background: #f8f9ff;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 8px;
+            border: 2px solid #c62828;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .page {
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER PAGE -->
+    <div class="page cover-page">
+        <div class="company-logo">ROOF IT</div>
+        <div class="tagline">Quality Roofing You Can Trust</div>
+        <div class="proposal-title">Proposal</div>
+        <div class="client-info">
+            <strong>Prepared For:</strong><br>
+            Client Name<br>
+            123 Main Street<br>
+            Cornwall, ON<br>
+            client@email.com<br>
+            (555) 123-4567
+        </div>
+        <div class="proposal-date">
+            Date: January 23, 2026<br>
+            Proposal #: RF-2026-001
+        </div>
+    </div>
+
+    <!-- ABOUT US PAGE -->
+    <div class="page intro-page">
+        <div class="greeting">Hello,</div>
+        <div class="greeting-sub">We're Roof It!</div>
+        <div class="greeting-sub">Nice to meet you!</div>
+        
+        <div class="about-section">
+            <h2 class="about-title">About Us</h2>
+            <p class="about-text">
+                At Roof It, we're dedicated to protecting your home with superior craftsmanship and premium materials. 
+                Every roof we install meets the highest industry standards, and we stand behind our work with comprehensive 
+                warranties. Your satisfaction and peace of mind are our top priorities.
+            </p>
+        </div>
+        
+        <div class="about-section">
+            <h2 class="about-title">Our Values</h2>
+            <div class="values-grid">
+                <div class="value-box">
+                    <h3>Quality Materials</h3>
+                    <p>We exclusively use premium materials from trusted manufacturers like GAF, ensuring your roof 
+                    stands the test of time and weather.</p>
+                </div>
+                <div class="value-box">
+                    <h3>Expert Craftsmanship</h3>
+                    <p>Our team takes pride in precision installation. Every detail matters, from proper ice & water 
+                    shield placement to perfect shingle alignment.</p>
+                </div>
+                <div class="value-box">
+                    <h3>Transparent Pricing</h3>
+                    <p>No hidden fees or surprise charges. We provide detailed quotes and communicate any additional 
+                    work before proceeding.</p>
+                </div>
+                <div class="value-box">
+                    <h3>Customer Service</h3>
+                    <p>From initial estimate to final cleanup, we maintain clear communication and respect your property 
+                    throughout the entire process.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUOTE PAGE -->
+    <div class="page quote-page">
+        <div class="quote-header">
+            <div class="info-section">
+                <h3>Project Details</h3>
+                <p><strong>Address:</strong> 123 Main Street</p>
+                <p><strong>Roof Area:</strong> 2,400 sq ft</p>
+                <p><strong>Pitch:</strong> 6/12</p>
+                <p><strong>Existing Layers:</strong> 1</p>
+            </div>
+            <div class="info-section">
+                <h3>Quote Information</h3>
+                <p><strong>Quote #:</strong> RF-2026-001</p>
+                <p><strong>Date:</strong> January 23, 2026</p>
+                <p><strong>Valid Until:</strong> February 23, 2026</p>
+            </div>
+        </div>
+        
+        <h1 class="section-title">Roofing Package Options</h1>
+        
+        <!-- OPTION 1 -->
+        <div class="option-card">
+            <div class="option-header">
+                <div class="option-name">Standard Package</div>
+                <div class="option-price">$8,500</div>
+            </div>
+            <div class="option-body">
+                <p class="option-description">
+                    Professional installation with quality materials and a 40-year architectural shingle warranty.
+                </p>
+                
+                <div class="scope-title">Description of Work</div>
+                <ul class="scope-list">
+                    <li>Set up perimeter protection for landscaping & property</li>
+                    <li>Complete tear-off and disposal of existing roof system (1 layer included)</li>
+                    <li>Inspect plywood sheathing and replace as needed ($85 per 4x8 sheet if required)</li>
+                    <li>Install felt underlayment</li>
+                    <li>Install standard ice and water shield at eaves and valleys</li>
+                    <li>Install 2x2 drip edge metal (color to be chosen by owner)</li>
+                    <li>Install GAF Timberline HDZ architectural shingles (40-year warranty, color to be chosen)</li>
+                    <li>Install starter shingles with proper nailing</li>
+                    <li>Install ridge vent for proper attic ventilation</li>
+                    <li>Seal all roof jacks, flashing, and vents</li>
+                    <li>Complete cleanup and debris removal</li>
+                    <li>Provide manufacturer's Limited Lifetime Warranty</li>
+                    <li>Provide 10-Year Limited Contractor's Warranty</li>
+                </ul>
+                
+                <div class="materials-section">
+                    <div class="materials-title">Premium Materials Included:</div>
+                    <div class="materials-list">
+                        • GAF Timberline HDZ Architectural Shingles (40-year warranty)<br>
+                        • Standard ice and water shield<br>
+                        • Felt underlayment<br>
+                        • Ridge vent system<br>
+                        • Drip edge and flashing materials
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION 2 -->
+        <div class="option-card">
+            <div class="option-header">
+                <div class="option-name">Premium Package</div>
+                <div class="option-price">$10,200</div>
+            </div>
+            <div class="option-body">
+                <p class="option-description">
+                    Enhanced protection with upgraded materials for superior weather resistance and longevity.
+                </p>
+                
+                <div class="scope-title">Description of Work</div>
+                <ul class="scope-list">
+                    <li>Set up perimeter protection for landscaping & property</li>
+                    <li>Complete tear-off and disposal of existing roof system (1 layer included)</li>
+                    <li>Inspect plywood sheathing and replace as needed ($85 per 4x8 sheet if required)</li>
+                    <li>Install GAF Deck Armor premium synthetic underlayment</li>
+                    <li>Install GAF StormGuard upgraded ice and water shield</li>
+                    <li>Install 2x2 drip edge metal (color to be chosen by owner)</li>
+                    <li>Install GAF Timberline HDZ architectural shingles (40-year warranty, color to be chosen)</li>
+                    <li>Install starter shingles with proper nailing</li>
+                    <li>Install ridge vent for proper attic ventilation</li>
+                    <li>Seal all roof jacks, flashing, and vents</li>
+                    <li>Complete cleanup and debris removal</li>
+                    <li>Provide enhanced manufacturer's warranty</li>
+                    <li>Provide 10-Year Limited Contractor's Warranty</li>
+                </ul>
+                
+                <div class="materials-section">
+                    <div class="materials-title">Premium Materials Included:</div>
+                    <div class="materials-list">
+                        • GAF Timberline HDZ Architectural Shingles (40-year warranty)<br>
+                        • <strong>GAF StormGuard upgraded ice and water shield</strong><br>
+                        • <strong>GAF Deck Armor premium synthetic underlayment</strong><br>
+                        • Ridge vent system<br>
+                        • Drip edge and flashing materials
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION 3 -->
+        <div class="option-card">
+            <div class="option-header">
+                <div class="option-name">Custom Deluxe Package</div>
+                <div class="option-price">$12,500</div>
+            </div>
+            <div class="option-body">
+                <p class="option-description">
+                    Complete premium solution with custom upgrades for maximum protection and curb appeal.
+                </p>
+                
+                <div class="scope-title">Description of Work</div>
+                <ul class="scope-list">
+                    <li>Set up perimeter protection for landscaping & property</li>
+                    <li>Complete tear-off and disposal of existing roof system (1 layer included)</li>
+                    <li>Inspect plywood sheathing and replace as needed ($85 per 4x8 sheet if required)</li>
+                    <li>Install GAF Deck Armor premium synthetic underlayment</li>
+                    <li>Install GAF StormGuard upgraded ice and water shield with extended coverage</li>
+                    <li>Install custom metal flashings (valleys, chimneys, walls)</li>
+                    <li>Install 2x2 drip edge metal with custom trim work (color to be chosen by owner)</li>
+                    <li>Install GAF Timberline HDZ architectural shingles (40-year warranty, color to be chosen)</li>
+                    <li>Install starter shingles with proper nailing</li>
+                    <li>Install ridge vent for proper attic ventilation</li>
+                    <li>Seal all roof jacks, flashing, and vents</li>
+                    <li>Priority scheduling</li>
+                    <li>Complete cleanup and debris removal</li>
+                    <li>Provide premium manufacturer's warranty</li>
+                    <li>Provide 10-Year Limited Contractor's Warranty</li>
+                </ul>
+                
+                <div class="materials-section">
+                    <div class="materials-title">Premium Materials Included:</div>
+                    <div class="materials-list">
+                        • GAF Timberline HDZ Architectural Shingles (40-year warranty)<br>
+                        • GAF StormGuard upgraded ice and water shield<br>
+                        • <strong>Extended ice and water coverage (full coverage option)</strong><br>
+                        • GAF Deck Armor premium synthetic underlayment<br>
+                        • <strong>Custom metal flashings (valleys, chimneys, walls)</strong><br>
+                        • Ridge vent system<br>
+                        • Drip edge and custom trim work
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IMPORTANT NOTES -->
+        <div class="important-note">
+            <h4>⚠️ Important: Additional Costs May Apply</h4>
+            <p><strong>Extra Layer Removal:</strong> If more than one layer of shingles is discovered during tear-off, 
+            additional removal will be charged at $25 per 100 sq ft.</p>
+            
+            <p><strong>Plywood Replacement:</strong> Rotted or damaged roof decking will need replacement at $85 per 
+            4x8 sheet (approximately $2.65 per sq ft).</p>
+            
+            <p><strong>Structural Repairs:</strong> Any unforeseen structural issues will be documented with photos 
+            and quoted separately before proceeding.</p>
+            
+            <p style="color: #c62828; font-weight: bold; margin-top: 15px;">
+                ✓ We will inspect and provide pricing for any additional work before proceeding. No surprise charges.
+            </p>
+        </div>
+
+        <div class="total-section">
+            <div class="total-row">
+                <span>Selected Package Total:</span>
+                <span>$10,200</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Roof It</strong> | Licensed & Insured | Serving Cornwall and Surrounding Areas</p>
+            <p>Phone: (555) 123-4567 | Email: info@roofit.com | www.roofit.com</p>
+            <p style="margin-top: 15px;">This quote is valid for 30 days from the date of issue. Final price subject to on-site inspection.</p>
+            <p>Payment terms: 50% deposit upon contract signing, 50% upon completion.</p>
+        </div>
+    </div>
+</body>
+</html>
