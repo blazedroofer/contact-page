@@ -1,0 +1,628 @@
+
+import React, { useState } from 'react';
+import { Calculator, FileText, DollarSign, Home, Printer } from 'lucide-react';
+
+export default function RoofingQuote() {
+  const [measurements, setMeasurements] = useState({
+    length: '',
+    width: '',
+    ridgeHip: '',
+    eaveLength: '',
+    gableLength: '',
+    valleys: '',
+    penetrations: '',
+    wallFlashing: '0'
+  });
+
+  const [pricing, setPricing] = useState({
+    shinglesPerSq: 95,
+    underlayPerSq: 35,
+    iceWaterPerRoll: 85,
+    dripEdgePerFt: 3.50,
+    valleyMetalPerFt: 12,
+    ridgeCapPerFt: 8,
+    starterPerFt: 4.50,
+    laborPerSq: 150,
+    wasteFactor: 10
+  });
+
+  const [customerInfo, setCustomerInfo] = useState({
+    name: '',
+    address: '',
+    phone: '',
+    email: '',
+    date: new Date().toISOString().split('T')[0]
+  });
+
+  const [scopeOptions, setScopeOptions] = useState({
+    includeWallFlashing: false,
+    tearOff: true,
+    shingleType: 'Architectural Shingles',
+    warranty: '25 Year Manufacturer Warranty'
+  });
+
+  const [showQuote, setShowQuote] = useState(false);
+
+  const calculate = () => {
+    const len = parseFloat(measurements.length) || 0;
+    const wid = parseFloat(measurements.width) || 0;
+    const ridgeHip = parseFloat(measurements.ridgeHip) || 0;
+    const eaveLength = parseFloat(measurements.eaveLength) || 0;
+    const gableLength = parseFloat(measurements.gableLength) || 0;
+    const valleys = parseFloat(measurements.valleys) || 0;
+    const penetrations = parseFloat(measurements.penetrations) || 0;
+    const wallFlash = parseFloat(measurements.wallFlashing) || 0;
+
+    const roofArea = (len * wid) / 100;
+    const wasteMultiplier = 1 + (pricing.wasteFactor / 100);
+    const totalSquares = roofArea * wasteMultiplier;
+
+    const ridgeCapCost = ridgeHip * pricing.ridgeCapPerFt;
+    const starterLinearFt = eaveLength + gableLength;
+    const starterCost = starterLinearFt * pricing.starterPerFt;
+
+    const eaveIceWater = eaveLength * 6;
+    const valleyIceWater = valleys * 6;
+    const penetrationIceWater = penetrations * 25;
+    const wallIceWater = scopeOptions.includeWallFlashing ? wallFlash * 6 : 0;
+    const totalIceWaterSqFt = eaveIceWater + valleyIceWater + penetrationIceWater + wallIceWater;
+    const iceWaterRolls = Math.ceil(totalIceWaterSqFt / 200);
+
+    const dripEdgeLinearFt = eaveLength + gableLength;
+    const dripEdgeCost = dripEdgeLinearFt * pricing.dripEdgePerFt;
+
+    const shinglesCost = totalSquares * pricing.shinglesPerSq;
+    const underlayCost = totalSquares * pricing.underlayPerSq;
+    const iceWaterCost = iceWaterRolls * pricing.iceWaterPerRoll;
+    const valleyCost = valleys * pricing.valleyMetalPerFt;
+    const wallFlashingCost = scopeOptions.includeWallFlashing ? wallFlash * pricing.valleyMetalPerFt : 0;
+    
+    const materialsCost = shinglesCost + underlayCost + iceWaterCost + dripEdgeCost + valleyCost + ridgeCapCost + starterCost + wallFlashingCost;
+    const laborCost = totalSquares * pricing.laborPerSq;
+    const subtotal = materialsCost + laborCost;
+    const hst = subtotal * 0.13;
+    const total = subtotal + hst;
+
+    return {
+      roofArea,
+      totalSquares,
+      iceWaterRolls,
+      ridgeHip,
+      starterLinearFt,
+      dripEdgeLinearFt,
+      shinglesCost,
+      underlayCost,
+      iceWaterCost,
+      dripEdgeCost,
+      valleyCost,
+      ridgeCapCost,
+      starterCost,
+      wallFlashingCost,
+      materialsCost,
+      laborCost,
+      subtotal,
+      hst,
+      total,
+      valleys
+    };
+  };
+
+  const results = calculate();
+
+  const generateQuote = () => {
+    setShowQuote(true);
+    setTimeout(() => window.print(), 100);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-6 print:shadow-none">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <Home className="w-8 h-8 text-blue-600" />
+                <h1 className="text-3xl font-bold text-slate-800">Ottawa Roofing Quote Generator</h1>
+              </div>
+              <p className="text-slate-600">Professional estimates with Ottawa building code compliance</p>
+            </div>
+            <button
+              onClick={generateQuote}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center gap-2 print:hidden"
+            >
+              <Printer className="w-5 h-5" />
+              Generate Quote
+            </button>
+          </div>
+        </div>
+
+        {!showQuote ? (
+          <div className="grid lg:grid-cols-3 gap-6">
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h2 className="text-xl font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                <FileText className="w-5 h-5" />
+                Customer Information
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Customer Name</label>
+                  <input
+                    type="text"
+                    value={customerInfo.name}
+                    onChange={(e) => setCustomerInfo({...customerInfo, name: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="John Smith"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Property Address</label>
+                  <input
+                    type="text"
+                    value={customerInfo.address}
+                    onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="123 Main St, Ottawa, ON"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
+                  <input
+                    type="tel"
+                    value={customerInfo.phone}
+                    onChange={(e) => setCustomerInfo({...customerInfo, phone: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="(613) 555-0123"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                  <input
+                    type="email"
+                    value={customerInfo.email}
+                    onChange={(e) => setCustomerInfo({...customerInfo, email: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="customer@email.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Quote Date</label>
+                  <input
+                    type="date"
+                    value={customerInfo.date}
+                    onChange={(e) => setCustomerInfo({...customerInfo, date: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6 pt-6 border-t">
+                <h3 className="text-lg font-semibold text-slate-800 mb-3">Scope Options</h3>
+                <div className="space-y-3">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={scopeOptions.tearOff}
+                      onChange={(e) => setScopeOptions({...scopeOptions, tearOff: e.target.checked})}
+                      className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-slate-700">Include tear-off and disposal</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={scopeOptions.includeWallFlashing}
+                      onChange={(e) => setScopeOptions({...scopeOptions, includeWallFlashing: e.target.checked})}
+                      className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-slate-700">Replace wall flashing</span>
+                  </label>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Shingle Type</label>
+                    <input
+                      type="text"
+                      value={scopeOptions.shingleType}
+                      onChange={(e) => setScopeOptions({...scopeOptions, shingleType: e.target.value})}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 text-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h2 className="text-xl font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                <Calculator className="w-5 h-5" />
+                Measurements (Google Earth)
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Roof Length (ft)</label>
+                  <input
+                    type="number"
+                    value={measurements.length}
+                    onChange={(e) => setMeasurements({...measurements, length: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Roof Width (ft)</label>
+                  <input
+                    type="number"
+                    value={measurements.width}
+                    onChange={(e) => setMeasurements({...measurements, width: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Ridge + Hip Length (ft)</label>
+                  <input
+                    type="number"
+                    value={measurements.ridgeHip}
+                    onChange={(e) => setMeasurements({...measurements, ridgeHip: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="0"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">For ridge cap shingles</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Eave Length (ft)</label>
+                  <input
+                    type="number"
+                    value={measurements.eaveLength}
+                    onChange={(e) => setMeasurements({...measurements, eaveLength: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="0"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">For starter shingles and ice/water</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Gable Length (ft)</label>
+                  <input
+                    type="number"
+                    value={measurements.gableLength}
+                    onChange={(e) => setMeasurements({...measurements, gableLength: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="0"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">For starter shingles</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Valley Length (ft)</label>
+                  <input
+                    type="number"
+                    value={measurements.valleys}
+                    onChange={(e) => setMeasurements({...measurements, valleys: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Roof Penetrations (count)</label>
+                  <input
+                    type="number"
+                    value={measurements.penetrations}
+                    onChange={(e) => setMeasurements({...measurements, penetrations: e.target.value})}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="0"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">Vents, pipes, chimneys</p>
+                </div>
+                {scopeOptions.includeWallFlashing && (
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Wall Flashing (linear ft)</label>
+                    <input
+                      type="number"
+                      value={measurements.wallFlashing}
+                      onChange={(e) => setMeasurements({...measurements, wallFlashing: e.target.value})}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="0"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h2 className="text-xl font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                  <DollarSign className="w-5 h-5" />
+                  Pricing (CAD)
+                </h2>
+                <div className="space-y-3">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 mb-1">Shingles/Sq</label>
+                      <input
+                        type="number"
+                        value={pricing.shinglesPerSq}
+                        onChange={(e) => setPricing({...pricing, shinglesPerSq: parseFloat(e.target.value)})}
+                        className="w-full px-2 py-1 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 mb-1">Underlay/Sq</label>
+                      <input
+                        type="number"
+                        value={pricing.underlayPerSq}
+                        onChange={(e) => setPricing({...pricing, underlayPerSq: parseFloat(e.target.value)})}
+                        className="w-full px-2 py-1 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 mb-1">Ice/Water/Roll</label>
+                      <input
+                        type="number"
+                        value={pricing.iceWaterPerRoll}
+                        onChange={(e) => setPricing({...pricing, iceWaterPerRoll: parseFloat(e.target.value)})}
+                        className="w-full px-2 py-1 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 mb-1">Drip Edge/ft</label>
+                      <input
+                        type="number"
+                        value={pricing.dripEdgePerFt}
+                        onChange={(e) => setPricing({...pricing, dripEdgePerFt: parseFloat(e.target.value)})}
+                        className="w-full px-2 py-1 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 mb-1">Valley Metal/ft</label>
+                      <input
+                        type="number"
+                        value={pricing.valleyMetalPerFt}
+                        onChange={(e) => setPricing({...pricing, valleyMetalPerFt: parseFloat(e.target.value)})}
+                        className="w-full px-2 py-1 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 mb-1">Ridge Cap/ft</label>
+                      <input
+                        type="number"
+                        value={pricing.ridgeCapPerFt}
+                        onChange={(e) => setPricing({...pricing, ridgeCapPerFt: parseFloat(e.target.value)})}
+                        className="w-full px-2 py-1 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 mb-1">Starter/ft</label>
+                      <input
+                        type="number"
+                        value={pricing.starterPerFt}
+                        onChange={(e) => setPricing({...pricing, starterPerFt: parseFloat(e.target.value)})}
+                        className="w-full px-2 py-1 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 mb-1">Labor/Sq</label>
+                      <input
+                        type="number"
+                        value={pricing.laborPerSq}
+                        onChange={(e) => setPricing({...pricing, laborPerSq: parseFloat(e.target.value)})}
+                        className="w-full px-2 py-1 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-slate-700 mb-1">Waste Factor (%)</label>
+                    <input
+                      type="number"
+                      value={pricing.wasteFactor}
+                      onChange={(e) => setPricing({...pricing, wasteFactor: parseFloat(e.target.value)})}
+                      className="w-full px-2 py-1 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h2 className="text-xl font-semibold text-slate-800 mb-4">Cost Summary</h2>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">Roof Area:</span>
+                    <span className="font-semibold">{results.totalSquares.toFixed(2)} sq</span>
+                  </div>
+                  <div className="flex justify-between border-t pt-2">
+                    <span className="text-slate-600">Materials:</span>
+                    <span>${results.materialsCost.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">Labor:</span>
+                    <span>${results.laborCost.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">Subtotal:</span>
+                    <span>${results.subtotal.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">HST (13%):</span>
+                    <span>${results.hst.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-lg font-bold text-blue-600 border-t-2 pt-2">
+                    <span>TOTAL:</span>
+                    <span>${results.total.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white rounded-lg shadow-lg p-12 max-w-4xl mx-auto print:shadow-none print:p-8">
+            <div className="text-center mb-8 border-b-2 border-slate-800 pb-6">
+              <h1 className="text-4xl font-bold text-slate-800 mb-2">ROOFING ESTIMATE</h1>
+              <p className="text-slate-600">Ottawa, Ontario</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 mb-8">
+              <div>
+                <h3 className="font-semibold text-slate-800 mb-2">CUSTOMER INFORMATION</h3>
+                <p className="text-sm"><strong>Name:</strong> {customerInfo.name}</p>
+                <p className="text-sm"><strong>Address:</strong> {customerInfo.address}</p>
+                {customerInfo.phone && <p className="text-sm"><strong>Phone:</strong> {customerInfo.phone}</p>}
+                {customerInfo.email && <p className="text-sm"><strong>Email:</strong> {customerInfo.email}</p>}
+              </div>
+              <div className="text-right">
+                <h3 className="font-semibold text-slate-800 mb-2">QUOTE DETAILS</h3>
+                <p className="text-sm"><strong>Date:</strong> {new Date(customerInfo.date).toLocaleDateString()}</p>
+                <p className="text-sm"><strong>Valid For:</strong> 30 Days</p>
+              </div>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="font-semibold text-slate-800 mb-3 text-lg border-b pb-2">SCOPE OF WORK</h3>
+              <div className="text-sm space-y-2">
+                {scopeOptions.tearOff && <p>• Complete tear-off of existing roofing material and disposal</p>}
+                <p>• Installation of {scopeOptions.shingleType}</p>
+                <p>• Application of synthetic underlayment across entire roof deck</p>
+                <p>• Installation of ice and water shield (6 feet) on all eaves per Ontario Building Code</p>
+                <p>• Installation of ice and water shield (6 feet wide) down all valleys</p>
+                <p>• Installation of ice and water shield around all roof penetrations</p>
+                {scopeOptions.includeWallFlashing && <p>• Replacement of wall flashing with ice and water shield (6 feet up walls)</p>}
+                {!scopeOptions.includeWallFlashing && <p>• Reuse of existing wall flashing (where condition permits)</p>}
+                <p>• Installation of drip edge on all eaves and gables</p>
+                <p>• Installation of open metal valleys (24 inch pre-formed metal)</p>
+                <p>• Installation of starter shingles on all eaves and gables</p>
+                <p>• Installation of ridge cap shingles on all ridges and hips</p>
+                <p>• Site cleanup and magnetic nail sweep</p>
+                <p>• {scopeOptions.warranty}</p>
+              </div>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="font-semibold text-slate-800 mb-3 text-lg border-b pb-2">MEASUREMENTS</h3>
+              <table className="w-full text-sm">
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-2">Roof Area (with {pricing.wasteFactor}% waste)</td>
+                    <td className="text-right py-2 font-semibold">{results.totalSquares.toFixed(2)} squares</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">Ridge and Hip Length</td>
+                    <td className="text-right py-2">{results.ridgeHip.toFixed(1)} linear feet</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">Starter Shingles (Eaves + Gables)</td>
+                    <td className="text-right py-2">{results.starterLinearFt.toFixed(1)} linear feet</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">Drip Edge</td>
+                    <td className="text-right py-2">{results.dripEdgeLinearFt.toFixed(1)} linear feet</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">Ice and Water Shield</td>
+                    <td className="text-right py-2">{results.iceWaterRolls} rolls</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="font-semibold text-slate-800 mb-3 text-lg border-b pb-2">COST BREAKDOWN</h3>
+              <table className="w-full text-sm">
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-2">{scopeOptions.shingleType}</td>
+                    <td className="text-right py-2">${results.shinglesCost.toFixed(2)}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">Synthetic Underlayment</td>
+                    <td className="text-right py-2">${results.underlayCost.toFixed(2)}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">Ice and Water Shield</td>
+                    <td className="text-right py-2">${results.iceWaterCost.toFixed(2)}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">Drip Edge</td>
+                    <td className="text-right py-2">${results.dripEdgeCost.toFixed(2)}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">Ridge Cap Shingles</td>
+                    <td className="text-right py-2">${results.ridgeCapCost.toFixed(2)}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">Starter Shingles</td>
+                    <td className="text-right py-2">${results.starterCost.toFixed(2)}</td>
+                  </tr>
+                  {results.valleys > 0 && (
+                    <tr className="border-b">
+                      <td className="py-2">Valley Metal - Open</td>
+                      <td className="text-right py-2">${results.valleyCost.toFixed(2)}</td>
+                    </tr>
+                  )}
+                  {scopeOptions.includeWallFlashing && results.wallFlashingCost > 0 && (
+                    <tr className="border-b">
+                      <td className="py-2">Wall Flashing</td>
+                      <td className="text-right py-2">${results.wallFlashingCost.toFixed(2)}</td>
+                    </tr>
+                  )}
+                  <tr className="border-b font-semibold">
+                    <td className="py-2">Total Materials</td>
+                    <td className="text-right py-2">${results.materialsCost.toFixed(2)}</td>
+                  </tr>
+                  <tr className="border-b font-semibold">
+                    <td className="py-2">Labor</td>
+                    <td className="text-right py-2">${results.laborCost.toFixed(2)}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-semibold">Subtotal</td>
+                    <td className="text-right py-3 font-semibold">${results.subtotal.toFixed(2)}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2">HST (13%)</td>
+                    <td className="text-right py-2">${results.hst.toFixed(2)}</td>
+                  </tr>
+                  <tr className="bg-blue-50">
+                    <td className="py-4 text-lg font-bold">TOTAL</td>
+                    <td className="text-right py-4 text-lg font-bold text-blue-600">${results.total.toFixed(2)} CAD</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="border-t-2 pt-6 mt-8">
+              <h3 className="font-semibold text-slate-800 mb-3">TERMS & CONDITIONS</h3>
+              <div className="text-xs space-y-1 text-slate-600">
+                <p>• This quote is valid for 30 days from the date above</p>
+                <p>• All work performed according to Ontario Building Code requirements</p>
+                <p>• Payment terms: 50% deposit, balance due upon completion</p>
+                <p>• Weather delays may extend completion timeline</p>
+                <p>• Customer responsible for providing access to property and electrical outlet</p>
+              </div>
+            </div>
+
+            <div className="mt-12 pt-8 border-t grid grid-cols-2 gap-12">
+              <div>
+                <p className="text-sm mb-6">Customer Signature:</p>
+                <div className="border-b border-slate-400 mb-2"></div>
+                <p className="text-xs text-slate-600">Date: _______________</p>
+              </div>
+              <div>
+                <p className="text-sm mb-6">Contractor Signature:</p>
+                <div className="border-b border-slate-400 mb-2"></div>
+                <p className="text-xs text-slate-600">Date: _______________</p>
+              </div>
+            </div>
+
+            <div className="mt-8 text-center print:hidden">
+              <button
+                onClick={() => setShowQuote(false)}
+                className="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-2 px-6 rounded-lg mr-4"
+              >
+                Back to Editor
+              </button>
+              <button
+                onClick={() => window.print()}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg"
+              >
+                Print Quote
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
